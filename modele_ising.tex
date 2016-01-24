@@ -151,7 +151,16 @@ $$
 w_{\beta}(n) = \prod_{x \sim y} \frac{\beta^{n_{xy}}}{n_{xy}!}
 $$
 
-soit $A \subset V_G$, on définit:
+Pour $A \subset V_G$ on définit une probabilité sur l'ensemble des chemins par:
+$$
+P^A_{\beta}(n) \propto 
+\begin{cases}
+0 & \text{si } \partial n \neq A \\
+w_{\beta}(n) & \text{si } \partial n = A \\
+\end{cases}
+$$
+Cette probabilité ne met du poids que sur les chemins dont les sources sont exactement $A$.
+Soit $A \subset V_G$, on définit:
 $$
 Z_{G,\beta}^f(A) \ \eqdef \ \sum_{\sigma \in \{ \pm 1 \}^{V_G} } \left( \prod_{x \in A} \sigma_x \right) e^{- \beta H_G(\sigma)}
 $$
