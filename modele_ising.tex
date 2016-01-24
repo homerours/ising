@@ -1,0 +1,185 @@
+\documentclass[a4paper,12pt]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[francais]{babel}
+
+\usepackage{graphicx}
+%\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% Encadrer les theoremes
+\usepackage{framed} % or, "mdframed"
+\usepackage[framed]{ntheorem}
+\newframedtheorem{thm}{Théorème}
+\newframedtheorem{prop}{Proposition}
+\newframedtheorem{defi}{Définition}
+
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+
+\newcommand\eqdef{\mathrel{\stackrel{\makebox[0pt]{\mbox{\normalfont\tiny def}}}{=}}}
+
+% Numérotation des sections en chiffres romains
+\renewcommand{\thesection}{\Roman{section}.}
+
+
+\title{ \begin{Huge} Le modèle d'Ising \end{Huge} }
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Introduction}
+Modèle introduit par Lenz en 1920. On considère un graphe $G := (V_G, E_G)$. A chaque sommet de $v \in V_G$ on associe une valeur $\sigma_v \in \{-1, 1\}$. L'énergie d'une telle configuration est alors donnée par:
+$$
+H_G(\sigma) = - \sum_{(x,y) \in E_G} \sigma_x \sigma_y
+$$
+soit deux fois le nombre de sommets voisins qui ne sont pas "alignés". Pour $(x,y) \in E_G$, on notera $x \sim y$.
+
+\begin{defi}
+La mesure de probabilité du modèle d'Ising sur le graphe $G$ à température inverse $\beta$ est définie par:
+
+	$$
+\langle X \rangle_{G, \beta}^{f} = \frac{1}{Z^f_{(G,\beta)}} \sum_{\sigma \in \{\pm 1\}^{V_G}} X(\sigma) \exp(-\beta H_G(\sigma))
+	$$
+	où $X$ est une fonction $\{\pm 1\}^{V_G} \rightarrow \mathbb{R}$ et où $Z^f_{(G,\beta)}=\sum_{\sigma \in \{\pm 1\}^{V_G}} e^{-\beta H_G(\sigma)}$ est appelée fonction de partition du modèle.
+	\end{defi}
+
+Remarques:
+\begin{itemize}
+\item la mesure est invariante par inversement de tous les signes: "symétrie"
+\item on voudrait travailler sur de plus grands graphes, $\mathbb{Z}^d$ par exemple
+\end{itemize}
+
+On considère maintenant $G \subset \mathbb{Z}^d$ et on définit la frontière $\partial G$ de $G$ par:
+$$
+\partial G = \lbrace x \in V_G \vert \exists y \in \mathbb{Z}^d \setminus G, y \sim x \rbrace
+$$
+
+Pour rompre la symétrie, on "plonge" $G$ dans un monde $+$ en définissant le nouvel Hamiltonien:
+$$
+H_G(\sigma)^+ = - \sum_{x \sim y} \sigma_x \sigma_y  -  \sum_{x \in \partial G} \sigma_x
+$$
+
+On pose maintenant $\Lambda_n = [-n,n]^d$ et on définit la magnétisation spontanée:
+$$
+m(\beta) = \inf_{n \in \mathbb{N}} \langle \sigma_0 \rangle^+_{\Lambda_n, \beta}
+$$
+
+\begin{defi}
+On définit la température inverse critique $\beta_c^{(d)} = \inf \lbrace \beta > 0 \vert m(\beta) > 0 \rbrace$
+\end{defi}
+
+Ising a montré que $\beta_c^{(1)} = + \infty$ puis Peirls montre que $\forall d \geq 2, \beta_c^{(d)} \in ]0, + \infty [$.
+\newline
+
+\underline{Questions}
+\begin{enumerate}
+\item $\beta_c^{(d)} = 0$ ?
+\item $m(\beta_c^{(d)})=0$ ?
+\item $\lim_{\beta \downarrow \beta_c} m(\beta)$ ?
+\item comportement de $m(\beta)$ autour de $\beta_c$ ?
+\item vitesse de décroissance en $n$ de $\langle \sigma_0 \rangle^+_{\Lambda_n, \beta}$ ?
+\end{enumerate}
+
+\begin{thm}[Kramers - Wanier]
+$\beta_c(2) = \frac{1}{2} \log(1 + \sqrt{2})$
+\end{thm}
+
+Pour $d \geq 3$ on n'a pas de formule explicite pour $\beta_c(d)$.
+
+\begin{thm}[Aizenman - Barsky - Fernandez (1980)]
+$$\forall \beta < \beta_c, \langle \sigma_0 \rangle^+_{\Lambda_n, \beta} \leq e^{-cn}$$
+où $c>0$ est une constante dépendant de $\beta$.
+\end{thm}
+
+\underline{Conjecture:} $m(\beta) = (\beta - \beta_c)^{\overline{\beta} + o(1)}$ quand $\beta \downarrow \beta_c$, avec
+\begin{equation*}
+\overline{\beta} =
+\begin{cases}
+1/8 & \text{si } d=2 \text{ (prouvé)}\\
+? & \text{si } d=3 \\
+1/2 & \text{si } d \geq 4 \text{ (prouvé)}
+\end{cases}
+\end{equation*}
+
+Pour $d=3, m(\beta_c)=0$ (Aizenman, DC, 2015).
+\newline
+
+\underline{Conjecture:} $\langle \sigma_0 \rangle^+_{\Lambda_n, \beta_c} = \frac{1}{n^{\alpha_1 + o(1)}}$
+\newline
+\begin{equation*}
+\alpha_1 =
+\begin{cases}
+1/8 & \text{si } d=2 \\
+? & \text{si } d=3 \\
+(d-2)/2 & \text{si } d \geq 4
+\end{cases}
+\end{equation*}
+\newline
+La corrélation (ici entre l'origine et la frontière) décroit donc à vitesse $n^{-\alpha_1}$ où $n$ est la distance entre l'origine et la frontière.
+\newline
+\newline
+Au lieu de faire tendre les limites du graphe vers l'infini, on peut aussi faire tendre la maille dur réseau vers 0. On se donne $\Omega$ un ouvert de $\mathbb{R}^d$. On se donne le graphe $\Omega_{\delta} = \Omega \cap \delta \mathbb{Z}^d$. Pour $x \in \Omega$, on pose $x^{\delta}$ un point de $\Omega_{\delta}$ très proche de $x$. On définit pour $x_1, \dots, x_k \in \Omega$:
+$$
+\langle \sigma_{x_1} \dots \sigma_{x_k} \rangle_{\Omega} = \lim_{\delta \downarrow 0} \frac{\langle \sigma_{x_1^{\delta}} \dots \sigma_{x_k^{\delta}} \rangle_{\Omega_{\delta}}}{\delta^{k\alpha_1}}
+$$
+
+\section{Représentation en courant aléatoire}
+
+\underline{But:} Obtenir/étudier une représentation gémotétrique du modèle d'Ising
+
+\begin{defi}[Courant]
+Un courant sur $G$ est une application: 
+$$n :\begin{array}[t]{rcl} E_G \rightarrow \mathbb{N} \\ xy \mapsto n_{xy} \end{array}$$
+\end{defi}
+
+Etant donné un courant $n$, on définit l'ensemble $\partial n$, l'ensemble des sources de $n$, par:
+$$
+\partial n = \Big\lbrace x \in V_G \ \vert \ \sum_{y \sim x} n_{xy} \text{ impair} \Big\rbrace
+$$
+On définit le poids de $n$ par:
+$$
+w_{\beta}(n) = \prod_{x \sim y} \frac{\beta^{n_{xy}}}{n_{xy}!}
+$$
+
+soit $A \subset V_G$, on définit:
+$$
+Z_{G,\beta}^f(A) \ \eqdef \ \sum_{\sigma \in \{ \pm 1 \}^{V_G} } \left( \prod_{x \in A} \sigma_x \right) e^{- \beta H_G(\sigma)}
+$$
+or
+$$
+\exp(-\beta H_G(\sigma)) = \prod_{x \sim y} \exp(\beta \sigma_x \sigma_y) = \prod_{x \sim y} \sum_{n_{xy}=0}^{+ \infty} \frac{(\beta \sigma_x \sigma_y)^{n_{xy}}}{n_{xy}!}
+$$
+d'où:
+$$
+Z_{G,\beta}^f(A) = \sum_{n \text{ courant}} \left( \prod_{x \sim y} \frac{\beta^{n_{xy}}}{n_{xy}!} \right) \left( \sum_{\sigma \in \{ \pm 1 \}^{V_G}} \prod_{x \in V_G} \sigma_x^{\sum_{x \sim y} n_{xy} + \delta_{x \in A}} \right)
+$$
+Beaucoup de termes de la somme principale sont nuls. Si $n$ est un courant tel que $\partial n \neq A$, alors le produit $\prod_{x \in V_G} \sigma_x^{\sum_{x \sim y} n_{xy} + \delta_{x \in A}}$ contient un terme $\sigma_x$ élevé à une puissance impaire. Cela implique que la somme de ces produits pour $\sigma \in \{ \pm 1 \}^{V_G}$ s'annule.
+\newline
+
+Il ne reste donc que:
+$$
+Z_{G,\beta}^f(A) = 2^{\vert V_G \vert} \sum_{\partial n  = A} w_{\beta}(n)
+$$
+
+On en déduit $\langle \prod_{x \in A} \sigma_x \rangle_{G,\beta}^f$, la constante de normalisation étant obtenue pour $A = \emptyset$:
+$$
+\langle \prod_{x \in A} \sigma_x \rangle_{G,\beta}^f = \frac{\sum_{\partial n = A} w_{\beta}(n)}{\sum_{\partial n = \emptyset} w_{\beta}(n)}
+$$
+
+\begin{prop}[Première inégalité de Griffiths]
+$$
+\forall A \subset V_G, \ \langle \prod_{x \in A} \sigma_x \rangle_{G,\beta}^f \geq 0
+$$
+\end{prop}
+
+\underline{Décomposition d'un courant:} On peut décomposer un courant en boucles et en chemins reliant deux sources. Etant donné un courant sans sources on peut construire un chemin sur $G$ partant d'un sommet $x$ de "degré" $\sum_{y \sim x} n_{xy}$ non nul (et pair) en se déplaçant sur une arrète $xy$ telle que $n_{xy}>0$. On retire 1 à cette arrète et on continu le chemin à partir de $y$ (ce qui est forcément possible vu que $y$ a maintenant un degré impair). L'opération se termine lorsque l'on revient en $x$. On décompose donc un courant sans sources en boucles. Si le courant a des boucles, on construit de la même façon des chemins qui partent des sources (et terminent donc sur ces sources), jusqu'à ce que le courant n'aie plus de sources. On le décompose alors en boucles. On v interprèter ces chemins en termes de marches aléatoires sur $G$\dots
+\end{document}
