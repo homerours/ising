@@ -191,5 +191,11 @@ $$
 $$
 \end{prop}
 
-\underline{Décomposition d'un courant:} On peut décomposer un courant en boucles et en chemins reliant deux sources. Etant donné un courant sans sources on peut construire un chemin sur $G$ partant d'un sommet $x$ de "degré" $\sum_{y \sim x} n_{xy}$ non nul (et pair) en se déplaçant sur une arrète $xy$ telle que $n_{xy}>0$. On retire 1 à cette arrète et on continu le chemin à partir de $y$ (ce qui est forcément possible vu que $y$ a maintenant un degré impair). L'opération se termine lorsque l'on revient en $x$. On décompose donc un courant sans sources en boucles. Si le courant a des boucles, on construit de la même façon des chemins qui partent des sources (et terminent donc sur ces sources), jusqu'à ce que le courant n'aie plus de sources. On le décompose alors en boucles. On v interprèter ces chemins en termes de marches aléatoires sur $G$\dots
+\underline{Cas de l'environnement +:}
+Travailler avec le Hamiltonien $H_{G}^+$ revient rajouter un sommet fantôme $g$ à $G$ et le relier à tous les sommets de $\partial G$. Si on impose $\sigma_g = +1$, le Hamiltonien est exactement $H_{G}^+$. On peut alors refaire le même calcul de $Z_{G,\beta}^+(A)$, pour le graphe $G^g$ auquel on a rajouté $g$. On a alors:
+$$
+Z_{G,\beta}^+(A) = 2^{\vert V_G \vert} \sum_{\partial n \cap V_G  = A} w_{\beta}(n)
+$$
+
+\underline{Décomposition d'un courant:} On peut décomposer un courant en boucles et en chemins reliant deux sources. Etant donné un courant sans sources on peut construire un chemin sur $G$ partant d'un sommet $x$ de "degré" $\sum_{y \sim x} n_{xy}$ non nul (et pair) en se déplaçant sur une arrète $xy$ telle que $n_{xy}>0$. On retire 1 à cette arrète et on continu le chemin à partir de $y$ (ce qui est forcément possible vu que $y$ a maintenant un degré impair). L'opération se termine lorsque l'on revient en $x$. On décompose donc un courant sans sources en boucles. Si le courant a des boucles, on construit de la même façon des chemins qui partent des sources (et terminent donc sur ces sources), jusqu'à ce que le courant n'aie plus de sources. On le décompose alors en boucles. On va interprèter ces chemins en termes de marches aléatoires sur $G$\dots
 \end{document}
