@@ -88,6 +88,7 @@ Ising a montré que $\beta_c^{(1)} = + \infty$ puis Peirls montre que $\forall d
 \item $\lim_{\beta \downarrow \beta_c} m(\beta)$ ?
 \item comportement de $m(\beta)$ autour de $\beta_c$ ?
 \item vitesse de décroissance en $n$ de $\langle \sigma_0 \rangle^+_{\Lambda_n, \beta}$ ?
+\item universalité?
 \end{enumerate}
 
 \begin{thm}[Kramers - Wanier]
@@ -133,6 +134,17 @@ $$
 \langle \sigma_{x_1} \dots \sigma_{x_k} \rangle_{\Omega} = \lim_{\delta \downarrow 0} \frac{\langle \sigma_{x_1^{\delta}} \dots \sigma_{x_k^{\delta}} \rangle_{\Omega_{\delta}}}{\delta^{k\alpha_1}}
 $$
 
+Universalité:
+Universalité signifie que les résultats reste valable si on transforme le graphe. Ceci est encore une question très ouverte.
+On une relation entre un nombre paire de spins et deux spins par le théorème suivant:
+\begin{thm}[Aizenman]
+$$\langle \sigma_{x_1} \dots \sigma_{x_{2k}} \rangle = \sum_{\pi \text{ pairing}} \langle \sigma_{x_{\pi(1)}} \sigma_{x_{\pi(2)}} \rangle \dots \langle \sigma_{x_{\pi(2k-1)}}\sigma_{x_{\pi(2k)}} \rangle$$
+\end{thm}
+On considère une transformation conforme $\phi$ dans $\mathbb{R}^2$ (holomorphe et bijective) entre $\Omega$ et $\phi(\Omega)$, on a le résultat pour l'universalité:
+\begin{thm}[Chelkak-Hongler-Izyurov]
+$$\langle \sigma_{x_1} \dots \sigma_{x_k} \rangle_{\Omega} = |\phi'(x_1)|^{\frac{1}{8}}\dots |\phi'(x_k)|^{\frac{1}{8}} \langle \sigma_{\phi(x_1)} \dots \sigma_{\phi(x_k)} \rangle_{\phi(\Omega)}$$
+\end{thm}
+
 \section{Représentation en courant aléatoire}
 
 \underline{But:} Obtenir/étudier une représentation gémotétrique du modèle d'Ising
@@ -176,9 +188,11 @@ Beaucoup de termes de la somme principale sont nuls. Si $n$ est un courant tel q
 \newline
 
 Il ne reste donc que:
+\begin{prop}
 $$
 Z_{G,\beta}^f(A) = 2^{\vert V_G \vert} \sum_{\partial n  = A} w_{\beta}(n)
 $$
+\end{prop}
 
 On en déduit $\langle \prod_{x \in A} \sigma_x \rangle_{G,\beta}^f$, la constante de normalisation étant obtenue pour $A = \emptyset$:
 $$
