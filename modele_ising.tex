@@ -7,6 +7,7 @@
 %\usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage{amsfonts}
+%\usepackage{dsfonts}
 \usepackage{amssymb}
 
 % Encadrer les theoremes
@@ -146,7 +147,7 @@ $$\langle \sigma_{x_1} \dots \sigma_{x_k} \rangle_{\Omega} = |\phi'(x_1)|^{\frac
 \end{thm}
 
 \section{Représentation en courant aléatoire}
-
+\subsection{Définitions}
 \underline{But:} Obtenir/étudier une représentation gémotétrique du modèle d'Ising
 
 \begin{defi}[Courant]
@@ -212,4 +213,36 @@ Z_{G,\beta}^+(A) = 2^{\vert V_G \vert} \sum_{\partial n \cap V_G  = A} w_{\beta}
 $$
 
 \underline{Décomposition d'un courant:} On peut décomposer un courant en boucles et en chemins reliant deux sources. Etant donné un courant sans sources on peut construire un chemin sur $G$ partant d'un sommet $x$ de "degré" $\sum_{y \sim x} n_{xy}$ non nul (et pair) en se déplaçant sur une arrète $xy$ telle que $n_{xy}>0$. On retire 1 à cette arrète et on continu le chemin à partir de $y$ (ce qui est forcément possible vu que $y$ a maintenant un degré impair). L'opération se termine lorsque l'on revient en $x$. On décompose donc un courant sans sources en boucles. Si le courant a des boucles, on construit de la même façon des chemins qui partent des sources (et terminent donc sur ces sources), jusqu'à ce que le courant n'aie plus de sources. On le décompose alors en boucles. On va interprèter ces chemins en termes de marches aléatoires sur $G$\dots
+
+\subsection{Le "switching lemma"}
+
+On commence par l'énoncé du lemme.
+\begin{thm}[Switching Lemma]
+Soit $A\subset G, x,y \in V_G, \forall F: \mathbb{N}^{E_G} \rightarrow \mathbb{R}$,
+$$\sum_{\overset{\partial n_1 = A,}{\partial n_2 = \{x,y\}}} F(n_1+n_2)w_\beta(n_1)w_\beta(n_2) = \sum_{\overset{\partial n_1 = A \Delta\{x,y\},}{\partial n_2 = \emptyset}}F(n_1+n_2)w_\beta(n_1)w_\beta(n_2)\mathbf{1}(x\overset{\widehat{n_1+n_2}}{\longrightarrow}y)
+$$
+\end{thm}
+On dit définit un modèle de percolation induit par un courant $\hat{n_e} = \mathbf{1}(n_e>0)$.
+\paragraph{preuve.} On note $n = n_2, m = n_1+n_2$.
+$$w_\beta(n_1)w_\beta(n_2) = \prod_{e}\frac{\beta^{(n_1+n_2)_e}}{(n_1)_e!(n_2)_e!} = w_\beta(m) \prod_e\left(\begin{array}{c} m_e \\ n_e \end{array} \right)
+$$
+On note $\left(\begin{array}{c} m \\ n \end{array} \right)$ le nombre de façons d'extraire un sous courant $n$ depuis un courant $m$, on a $\prod_e\left(\begin{array}{c} m_e \\ n_e \end{array} \right) = \left(\begin{array}{c} m \\ n \end{array} \right)$.
+
+Le terme à gauche devient $$
+\sum_{\begin{array}{c}
+\partial m = A\Delta\{x,y\},\\
+n\leqslant m, \\
+\partial n = \emptyset
+\end{array}} F(m)w_\beta(m) \left(\begin{array}{c} m \\ n
+\end{array} \right)= \sum_{\partial m = A\Delta\{x,y\}}F(m)w_\beta(m)\sum_{\overset{n\leqslant m,}{\partial n = \{x,y\}}}\left(\begin{array}{c} m \\ n
+\end{array} \right)
+$$
+La seconde somme est en fait $\#\big\{ \mathcal{N}\subset \mathcal{M},\partial \mathcal{N} = \{x,y\}\big\}$.
+
+Le terme à droite est en fait $$
+\sum_{\partial m = A \Delta \{x,y\}} F(m)w_\beta(m)\mathbf{1}(x\overset{\hat{m}}{\longrightarrow}y)\sum_{\overset{\partial n = \emptyset}{n \leqslant m}}\left(\begin{array}{c} m \\ n \end{array} \right).
+$$
+On a $\displaystyle\sum_{\overset{\partial n = \emptyset}{n \leqslant m}}\left(\begin{array}{c} m \\ n \end{array} \right) = \#\{\mathcal{N}\subset \mathcal{M}, \partial \mathcal{N} = \emptyset\}$.
+Il reste à voir que  $$\#\big\{ \mathcal{N}\subset \mathcal{M},\partial \mathcal{N} = \{x,y\}\big\} = \mathbf{1}(x\overset{\hat{m}}{\longrightarrow}y)\#\{\mathcal{N}\subset \mathcal{M}, \partial \mathcal{N} = \emptyset\}.$$
+Le cas où $x$ non connecté à $y$ est évident, pour le cas $x\overset{\hat{m}}{\rightarrow}y$ et on observe que $\mathcal{N} \longrightarrow \mathcal{N}\Delta\mathcal{K}$ est bijective entre les deux ensembles pour un $\mathcal{K}$ tel que $\partial \mathcal{K} = \{x,y\}$.
 \end{document}
