@@ -250,4 +250,24 @@ $$
 On a $\displaystyle\sum_{\overset{\partial n = \emptyset}{n \leqslant m}}\left(\begin{array}{c} m \\ n \end{array} \right) = \#\{\mathcal{N}\subset \mathcal{M}, \partial \mathcal{N} = \emptyset\}$.
 Il reste à voir que  $$\#\big\{ \mathcal{N}\subset \mathcal{M},\partial \mathcal{N} = \{x,y\}\big\} = \mathbf{1}(x\overset{\hat{m}}{\longrightarrow}y)\#\{\mathcal{N}\subset \mathcal{M}, \partial \mathcal{N} = \emptyset\}.$$
 Le cas où $x$ non connecté à $y$ est évident, pour le cas $x\overset{\hat{m}}{\rightarrow}y$ et on observe que $\mathcal{N} \longrightarrow \mathcal{N}\Delta\mathcal{K}$ est bijective entre les deux ensembles pour un $\mathcal{K}$ tel que $\partial \mathcal{K} = \{x,y\}$.
+
+Corollaires du switching lemma:
+\begin{enumerate}
+\item $(\langle \sigma_x \sigma_y \rangle_{G,\beta}^f)^2 = P_{G,\beta}^\emptyset \otimes P_{G,\beta}^\emptyset (x\overset{\widehat{n_1+n_2}}{\longrightarrow} y)$
+\item $(\langle \sigma_0\rangle_{G,\beta}^+)^2= P_{G\cup\{g\},\beta}^\emptyset \otimes P_{G\cup\{g\},\beta}^\emptyset (0\overset{\widehat{n_1+n_2}}{\longrightarrow} g)$
+\item $\displaystyle \frac{d}{d\beta}\langle \sigma_x \sigma_y \rangle_{G,\beta}^f \geqslant 0, \frac{d}{d\beta}\langle \sigma_0 \rangle_{G,\beta}^+ \geqslant 0$
+\end{enumerate}
+
+\paragraph{preuves:}
+\begin{enumerate}
+\item \begin{multline*}
+(\langle \sigma_x \sigma_y \rangle_{G,\beta}^f)^2 = \frac{Z^2(\{x,y\})}{Z^2(\emptyset)} = \frac{\sum_{\partial n_1 = \{x,y\},\partial n_2 = \{x,y\}}w_\beta(n_1)w_\beta(n_2)}{\sum_{\partial n_1 = \emptyset,\partial n_2 = \emptyset}w_\beta(n_1)w_\beta(n_2)}\\ \overset{SL}{=} \frac{\sum_{\partial n_1 = \partial n_2 = \emptyset}w_\beta(n_1)w_\beta(n_2)}{\sum_{\partial n_1 = \partial n_2 = \emptyset}w_\beta(n_1)w_\beta(n_2)} = P_{G,\beta}^\emptyset \otimes P_{G,\beta}^\emptyset (x\overset{\widehat{n_1+n_2}}{\longrightarrow} y)
+\end{multline*}
+\item idem en ajoutant le point fantôme.
+\item \begin{multline*}
+\frac{d}{d\beta}\langle \sigma_x \sigma_y \rangle_{G,\beta}^f = \frac{d}{d\beta} \frac{\sum \sigma_x \sigma_y e^{\beta \sum_{x\sim y}\sigma_u \sigma_v}}{\sum e^{\beta\sum_{u\sim v}\sigma_u \sigma_v}} \\ = \frac{(\sum_{x\sim y,u\sim v}\sigma_x\sigma_y\sigma_u\sigma_v e^{\beta \sum \sigma_u\sigma_v})(\sum e^{\beta\sum_{u\sim v}\sigma_u \sigma_v}) - (\sum \sigma_x\sigma_y e^{\beta\sum\sigma_u\sigma_v})(\sum\sum_{u\sim v}\sigma_u\sigma_v e^{\beta \sum\sigma_u\sigma_v})}{(\sum e^{\beta \sum \sigma_u \sigma_v})^2} \\
+= \sum_{u\sim v}\langle \sigma_x \sigma_y \sigma_u \sigma_v\rangle - \langle \sigma_x \sigma_y\rangle\langle \sigma_u \sigma_v \rangle \\
+\langle \sigma_x \sigma_y \sigma_u \sigma_v\rangle - \langle \sigma_x \sigma_y\rangle\langle \sigma_u \sigma_v \rangle = \frac{Z(\{x,y,u,v\})Z(\emptyset) - Z(\{x,y\})Z(\{u,v\})}{Z^2(\emptyset)} \\ = \frac{\sum_{\partial n_1 = \{x,y\}\Delta\{u,v\},\partial n_2 = \emptyset}w(n_1)w(n_2)(1-\mathbf{1}(u\longrightarrow v))}{Z^2(\emptyset)}\geqslant 0
+\end{multline*}
+\end{enumerate}
 \end{document}
