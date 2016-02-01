@@ -270,4 +270,16 @@ Corollaires du switching lemma:
 \langle \sigma_x \sigma_y \sigma_u \sigma_v\rangle - \langle \sigma_x \sigma_y\rangle\langle \sigma_u \sigma_v \rangle = \frac{Z(\{x,y,u,v\})Z(\emptyset) - Z(\{x,y\})Z(\{u,v\})}{Z^2(\emptyset)} \\ = \frac{\sum_{\partial n_1 = \{x,y\}\Delta\{u,v\},\partial n_2 = \emptyset}w(n_1)w(n_2)(1-\mathbf{1}(u\longrightarrow v))}{Z^2(\emptyset)}\geqslant 0
 \end{multline*}
 \end{enumerate}
+Enfin une inégalité qui joue le rôle de l'inégalité de BK de la percolation de Bernoulli:
+\begin{prop}[Inégalité de Simon-Lieb]
+Soit $S\subset \mathbb{Z}^d$ séparant $0$ de $x$.
+$$\langle \sigma_0 \sigma_x \rangle_{G,\beta}^f \leqslant \sum_{y\in S}\langle \sigma_0 \sigma_y\rangle_{G,\beta}^f \langle \sigma_y \sigma_x\rangle_{G,\beta}^f
+$$
+\end{prop}
+\paragraph{preuve}
+$$\frac{\langle \sigma_0 \sigma_y \rangle\langle\sigma_y \sigma_x\rangle}{\langle \sigma_0 \sigma_x\rangle} = \frac{Z(\{0,y\})Z(\{y,x\})}{Z(\{0,x\})Z(\emptyset)} = \frac{\sum_{\partial n_1=\{0,x\},\partial n_2= \emptyset} w(n_1)w(n_2)\mathbf{1}(x\rightarrow y)}{\sum_{\partial n_1 = \{0,x\},\partial n_2 = \emptyset}w(n_1)w(n_2)} = P^{\{0,x\}}\otimes P^\emptyset(x\rightarrow y)
+$$
+On somme les $y\in S$ et on a 
+$$\sum_{y\in S}\frac{\langle \sigma_0 \sigma_y \rangle\langle\sigma_y \sigma_x\rangle}{\langle \sigma_0 \sigma_x\rangle} = \sum_{y\in S}P^{\{0,x\}}\otimes P^\emptyset(x\rightarrow y) \geqslant 1.
+$$
 \end{document}
