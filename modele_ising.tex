@@ -25,6 +25,9 @@
 % Numérotation des sections en chiffres romains
 \renewcommand{\thesection}{\Roman{section}.}
 
+% Environnement de preuves
+\newenvironment{preuve}{\paragraph{Preuve:}}{\hfill$\square$}
+
 
 \title{ \begin{Huge} Le modèle d'Ising \end{Huge} }
 
@@ -219,21 +222,23 @@ $$
 
 \underline{Décomposition d'un courant:} On peut décomposer un courant en boucles et en chemins reliant deux sources. Etant donné un courant sans sources on peut construire un chemin sur $G$ partant d'un sommet $x$ de "degré" $\sum_{y \sim x} n_{xy}$ non nul (et pair) en se déplaçant sur une arrète $xy$ telle que $n_{xy}>0$. On retire 1 à cette arrète et on continu le chemin à partir de $y$ (ce qui est forcément possible vu que $y$ a maintenant un degré impair). L'opération se termine lorsque l'on revient en $x$. On décompose donc un courant sans sources en boucles. Si le courant a des boucles, on construit de la même façon des chemins qui partent des sources (et terminent donc sur ces sources), jusqu'à ce que le courant n'aie plus de sources. On le décompose alors en boucles. On va interprèter ces chemins en termes de marches aléatoires sur $G$\dots
 
-\subsection{Le "switching lemma"}
+\subsection{Le ``switching lemma"}
 
 On commence par l'énoncé du lemme.
 \begin{thm}[Switching Lemma]
 Soit $A\subset G, x,y \in V_G, \forall F: \mathbb{N}^{E_G} \rightarrow \mathbb{R}$,
-$$\sum_{\overset{\partial n_1 = A,}{\partial n_2 = \{x,y\}}} F(n_1+n_2)w_\beta(n_1)w_\beta(n_2) = \sum_{\overset{\partial n_1 = A \Delta\{x,y\},}{\partial n_2 = \emptyset}}F(n_1+n_2)w_\beta(n_1)w_\beta(n_2)\mathbf{1}(x\overset{\widehat{n_1+n_2}}{\longrightarrow}y)
+$$\sum_{\overset{\partial n_1 = A,}{\partial n_2 = \{x,y\}}} F(n_1+n_2)w_\beta(n_1)w_\beta(n_2) = \sum_{\overset{\partial n_1 = A \Delta\{x,y\},}{\partial n_2 = \emptyset}}F(n_1+n_2)w_\beta(n_1)w_\beta(n_2)\mathbf{1}(x\overset{\widehat{n_1+n_2}}{\longleftrightarrow}y)
 $$
 \end{thm}
-On dit définit un modèle de percolation induit par un courant $\hat{n_e} = \mathbf{1}(n_e>0)$.
-\paragraph{preuve.} On note $n = n_2, m = n_1+n_2$.
+On dit définit un modèle de percolation induit par un courant $\hat{n}_e = \mathbf{1}(n_e>0)$.
+\begin{preuve}
+On note $n = n_2, m = n_1+n_2$.
 $$w_\beta(n_1)w_\beta(n_2) = \prod_{e}\frac{\beta^{(n_1+n_2)_e}}{(n_1)_e!(n_2)_e!} = w_\beta(m) \prod_e\left(\begin{array}{c} m_e \\ n_e \end{array} \right)
 $$
 On note $\left(\begin{array}{c} m \\ n \end{array} \right)$ le nombre de façons d'extraire un sous courant $n$ depuis un courant $m$, on a $\prod_e\left(\begin{array}{c} m_e \\ n_e \end{array} \right) = \left(\begin{array}{c} m \\ n \end{array} \right)$.
 
-Le terme à gauche devient $$
+Le terme à gauche devient:
+$$
 \sum_{\begin{array}{c}
 \partial m = A\Delta\{x,y\},\\
 n\leqslant m, \\
@@ -245,41 +250,65 @@ $$
 La seconde somme est en fait $\#\big\{ \mathcal{N}\subset \mathcal{M},\partial \mathcal{N} = \{x,y\}\big\}$.
 
 Le terme à droite est en fait $$
-\sum_{\partial m = A \Delta \{x,y\}} F(m)w_\beta(m)\mathbf{1}(x\overset{\hat{m}}{\longrightarrow}y)\sum_{\overset{\partial n = \emptyset}{n \leqslant m}}\left(\begin{array}{c} m \\ n \end{array} \right).
+\sum_{\partial m = A \Delta \{x,y\}} F(m)w_\beta(m)\mathbf{1}(x\overset{\hat{m}}{\longleftrightarrow}y)\sum_{\overset{\partial n = \emptyset}{n \leqslant m}}\left(\begin{array}{c} m \\ n \end{array} \right).
 $$
 On a $\displaystyle\sum_{\overset{\partial n = \emptyset}{n \leqslant m}}\left(\begin{array}{c} m \\ n \end{array} \right) = \#\{\mathcal{N}\subset \mathcal{M}, \partial \mathcal{N} = \emptyset\}$.
-Il reste à voir que  $$\#\big\{ \mathcal{N}\subset \mathcal{M},\partial \mathcal{N} = \{x,y\}\big\} = \mathbf{1}(x\overset{\hat{m}}{\longrightarrow}y)\#\{\mathcal{N}\subset \mathcal{M}, \partial \mathcal{N} = \emptyset\}.$$
-Le cas où $x$ non connecté à $y$ est évident, pour le cas $x\overset{\hat{m}}{\rightarrow}y$ et on observe que $\mathcal{N} \longrightarrow \mathcal{N}\Delta\mathcal{K}$ est bijective entre les deux ensembles pour un $\mathcal{K}$ tel que $\partial \mathcal{K} = \{x,y\}$.
+Il reste à voir que  $$\#\big\{ \mathcal{N}\subset \mathcal{M},\partial \mathcal{N} = \{x,y\}\big\} = \mathbf{1}(x\overset{\hat{m}}{\longleftrightarrow}y)\#\{\mathcal{N}\subset \mathcal{M}, \partial \mathcal{N} = \emptyset\}.$$
+Le cas où $x$ non connecté à $y$ est évident, pour le cas $x\overset{\hat{m}}{\leftrightarrow}y$ et on observe que $\mathcal{N} \longleftrightarrow \mathcal{N}\Delta\mathcal{K}$ est bijective entre les deux ensembles pour un $\mathcal{K}$ tel que $\partial \mathcal{K} = \{x,y\}$.
+\end{preuve}
 
-Corollaires du switching lemma:
+\begin{prop}[Corollaires du switching lemma]\leavevmode
 \begin{enumerate}
-\item $(\langle \sigma_x \sigma_y \rangle_{G,\beta}^f)^2 = P_{G,\beta}^\emptyset \otimes P_{G,\beta}^\emptyset (x\overset{\widehat{n_1+n_2}}{\longrightarrow} y)$
-\item $(\langle \sigma_0\rangle_{G,\beta}^+)^2= P_{G\cup\{g\},\beta}^\emptyset \otimes P_{G\cup\{g\},\beta}^\emptyset (0\overset{\widehat{n_1+n_2}}{\longrightarrow} g)$
+\item $(\langle \sigma_x \sigma_y \rangle_{G,\beta}^f)^2 = P_{G,\beta}^\emptyset \otimes P_{G,\beta}^\emptyset (x\overset{\widehat{n_1+n_2}}{\longleftrightarrow} y)$
+\item $(\langle \sigma_0\rangle_{G,\beta}^+)^2= P_{G\cup\{g\},\beta}^\emptyset \otimes P_{G\cup\{g\},\beta}^\emptyset (0\overset{\widehat{n_1+n_2}}{\longleftrightarrow} g)$
 \item $\displaystyle \frac{d}{d\beta}\langle \sigma_x \sigma_y \rangle_{G,\beta}^f \geqslant 0, \frac{d}{d\beta}\langle \sigma_0 \rangle_{G,\beta}^+ \geqslant 0$
 \end{enumerate}
+\end{prop}
 
-\paragraph{preuves:}
+\begin{preuve}
+
 \begin{enumerate}
-\item \begin{multline*}
-(\langle \sigma_x \sigma_y \rangle_{G,\beta}^f)^2 = \frac{Z^2(\{x,y\})}{Z^2(\emptyset)} = \frac{\sum_{\partial n_1 = \{x,y\},\partial n_2 = \{x,y\}}w_\beta(n_1)w_\beta(n_2)}{\sum_{\partial n_1 = \emptyset,\partial n_2 = \emptyset}w_\beta(n_1)w_\beta(n_2)}\\ \overset{SL}{=} \frac{\sum_{\partial n_1 = \partial n_2 = \emptyset}w_\beta(n_1)w_\beta(n_2)}{\sum_{\partial n_1 = \partial n_2 = \emptyset}w_\beta(n_1)w_\beta(n_2)} = P_{G,\beta}^\emptyset \otimes P_{G,\beta}^\emptyset (x\overset{\widehat{n_1+n_2}}{\longrightarrow} y)
-\end{multline*}
+
+\item 
+\begin{align*}
+(\langle \sigma_x \sigma_y \rangle_{G,\beta}^f)^2 
+&= \frac{Z^2(\{x,y\})}{Z^2(\emptyset)} 
+= \frac{\sum_{\partial n_1 = \{x,y\},\partial n_2 = \{x,y\}}w_\beta(n_1)w_\beta(n_2)}{\sum_{\partial n_1 = \emptyset,\partial n_2 = \emptyset}w_\beta(n_1)w_\beta(n_2)}\\ 
+&\overset{SL}{=} \frac{\sum_{\partial n_1 = \partial n_2 = \emptyset}w_\beta(n_1)w_\beta(n_2)}{\sum_{\partial n_1 = \partial n_2 = \emptyset}w_\beta(n_1)w_\beta(n_2)} = P_{G,\beta}^\emptyset \otimes P_{G,\beta}^\emptyset (x\overset{\widehat{n_1+n_2}}{\longleftrightarrow} y)
+\end{align*}
+
 \item idem en ajoutant le point fantôme.
-\item \begin{multline*}
-\frac{d}{d\beta}\langle \sigma_x \sigma_y \rangle_{G,\beta}^f = \frac{d}{d\beta} \frac{\sum \sigma_x \sigma_y e^{\beta \sum_{x\sim y}\sigma_u \sigma_v}}{\sum e^{\beta\sum_{u\sim v}\sigma_u \sigma_v}} \\ = \frac{(\sum_{x\sim y,u\sim v}\sigma_x\sigma_y\sigma_u\sigma_v e^{\beta \sum \sigma_u\sigma_v})(\sum e^{\beta\sum_{u\sim v}\sigma_u \sigma_v}) - (\sum \sigma_x\sigma_y e^{\beta\sum\sigma_u\sigma_v})(\sum\sum_{u\sim v}\sigma_u\sigma_v e^{\beta \sum\sigma_u\sigma_v})}{(\sum e^{\beta \sum \sigma_u \sigma_v})^2} \\
-= \sum_{u\sim v}\langle \sigma_x \sigma_y \sigma_u \sigma_v\rangle - \langle \sigma_x \sigma_y\rangle\langle \sigma_u \sigma_v \rangle \\
-\langle \sigma_x \sigma_y \sigma_u \sigma_v\rangle - \langle \sigma_x \sigma_y\rangle\langle \sigma_u \sigma_v \rangle = \frac{Z(\{x,y,u,v\})Z(\emptyset) - Z(\{x,y\})Z(\{u,v\})}{Z^2(\emptyset)} \\ = \frac{\sum_{\partial n_1 = \{x,y\}\Delta\{u,v\},\partial n_2 = \emptyset}w(n_1)w(n_2)(1-\mathbf{1}(u\longrightarrow v))}{Z^2(\emptyset)}\geqslant 0
-\end{multline*}
+
+\item 
+\begin{align*}
+&\frac{d}{d\beta}\langle \sigma_x \sigma_y \rangle_{G,\beta}^f 
+= \frac{d}{d\beta} \frac{\sum \sigma_x \sigma_y e^{\beta \sum_{x\sim y}\sigma_u \sigma_v}}{\sum e^{\beta\sum_{u\sim v}\sigma_u \sigma_v}}\\ 
+&= \frac{(\sum_{x\sim y,u\sim v}\sigma_x\sigma_y\sigma_u\sigma_v e^{\beta \sum \sigma_u\sigma_v})(\sum e^{\beta\sum_{u\sim v}\sigma_u \sigma_v}) - (\sum \sigma_x\sigma_y e^{\beta\sum\sigma_u\sigma_v})(\sum\sum_{u\sim v}\sigma_u\sigma_v e^{\beta \sum\sigma_u\sigma_v})}{(\sum e^{\beta \sum \sigma_u \sigma_v})^2} \\
+&= \sum_{u\sim v}\langle \sigma_x \sigma_y \sigma_u \sigma_v\rangle - \langle \sigma_x \sigma_y\rangle\langle \sigma_u \sigma_v \rangle \\
+\end{align*}
+\begin{align*}
+\langle \sigma_x \sigma_y \sigma_u \sigma_v\rangle - \langle \sigma_x \sigma_y\rangle\langle \sigma_u \sigma_v \rangle 
+&= \frac{Z(\{x,y,u,v\})Z(\emptyset) - Z(\{x,y\})Z(\{u,v\})}{Z^2(\emptyset)} \\ 
+&= \frac{\sum_{\partial n_1 = \{x,y\}\Delta\{u,v\},\partial n_2 = \emptyset}w(n_1)w(n_2)(1-\mathbf{1}(u\longleftrightarrow v))}{Z^2(\emptyset)} \geq 0
+\end{align*}
 \end{enumerate}
+\end{preuve}
+
 Enfin une inégalité qui joue le rôle de l'inégalité de BK de la percolation de Bernoulli:
+
 \begin{prop}[Inégalité de Simon-Lieb]
 Soit $S\subset \mathbb{Z}^d$ séparant $0$ de $x$.
 $$\langle \sigma_0 \sigma_x \rangle_{G,\beta}^f \leqslant \sum_{y\in S}\langle \sigma_0 \sigma_y\rangle_{G,\beta}^f \langle \sigma_y \sigma_x\rangle_{G,\beta}^f
 $$
 \end{prop}
-\paragraph{preuve}
-$$\frac{\langle \sigma_0 \sigma_y \rangle\langle\sigma_y \sigma_x\rangle}{\langle \sigma_0 \sigma_x\rangle} = \frac{Z(\{0,y\})Z(\{y,x\})}{Z(\{0,x\})Z(\emptyset)} = \frac{\sum_{\partial n_1=\{0,x\},\partial n_2= \emptyset} w(n_1)w(n_2)\mathbf{1}(x\rightarrow y)}{\sum_{\partial n_1 = \{0,x\},\partial n_2 = \emptyset}w(n_1)w(n_2)} = P^{\{0,x\}}\otimes P^\emptyset(x\rightarrow y)
+
+\begin{preuve}
+$$\frac{\langle \sigma_0 \sigma_y \rangle\langle\sigma_y \sigma_x\rangle}{\langle \sigma_0 \sigma_x\rangle} = \frac{Z(\{0,y\})Z(\{y,x\})}{Z(\{0,x\})Z(\emptyset)} = \frac{\sum_{\partial n_1=\{0,x\},\partial n_2= \emptyset} w(n_1)w(n_2)\mathbf{1}(x\leftrightarrow y)}{\sum_{\partial n_1 = \{0,x\},\partial n_2 = \emptyset}w(n_1)w(n_2)} = P^{\{0,x\}}\otimes P^\emptyset(x\leftrightarrow y)
 $$
 On somme les $y\in S$ et on a 
-$$\sum_{y\in S}\frac{\langle \sigma_0 \sigma_y \rangle\langle\sigma_y \sigma_x\rangle}{\langle \sigma_0 \sigma_x\rangle} = \sum_{y\in S}P^{\{0,x\}}\otimes P^\emptyset(x\rightarrow y) \geqslant 1.
+$$\sum_{y\in S}\frac{\langle \sigma_0 \sigma_y \rangle\langle\sigma_y \sigma_x\rangle}{\langle \sigma_0 \sigma_x\rangle} = \sum_{y\in S}P^{\{0,x\}}\otimes P^\emptyset(x\leftrightarrow y) \geqslant 1.
 $$
+\end{preuve}
+\newpage
+
 \end{document}
