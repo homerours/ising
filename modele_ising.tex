@@ -329,7 +329,7 @@ $$\langle \sigma_0 \sigma_x \rangle_{\mathbb{Z}^d,\beta}^f
 \leq \tilde{\phi}_{\beta}(S) \sup_{y \in S} \langle \sigma_y \sigma_x \rangle_{\mathbb{Z}^d,\beta}^f 
 = \tilde{\phi}_{\beta}(S) \sup_{y \in S} \langle \sigma_0 \sigma_{x-y} \rangle_{\mathbb{Z}^d,\beta}^f$$
 
-On fixe $n \in \mathbb{N}$ tel que $S \subset \Lambda_n$. Soit $k \in \mathcal{N}^*$:
+On fixe $n \in \mathbb{N}$ tel que $S \subset \Lambda_n$. Soit $k \in \mathbb{N}^*$:
 $$
 \sup_{x \notin \Lambda_{kn}} \langle \sigma_0 \sigma_x \rangle_{\mathbb{Z}^d,\beta}^f 
 \leq \tilde{\phi}_{\beta}(S) \sup_{x \notin \Lambda_{kn}} \sup_{y \in S} \langle \sigma_0 \sigma_{x-y} \rangle_{\mathbb{Z}^d,\beta}^f
@@ -344,5 +344,40 @@ et montrer de même qu'il y a décroissance exponantielle dès que $\phi_{\beta}
 $$
 \sum_{x \in \mathbb{Z}^d} \langle \sigma_0 \sigma_x \rangle^f_{\beta_c, \mathbb{Z}^d} = + \infty
 $$
+
+\begin{thm}[Aizenman, Barsky, Fernandez]
+Soit $d \geq 2$,
+\begin{itemize}
+\item Si $\beta < \beta_c$, alors $\exists c >0, \ \forall x \in \mathbb{Z}^d, \ \langle \sigma_0 \sigma_x \rangle \leq e^{-c \vert x \vert}$
+\item Si $\beta > \beta_c$, alors $\langle \sigma_0 \rangle^+_{\mathbb{Z}^d,\beta} \geq \sqrt{\frac{\beta^2 - \beta_c^2}{\beta^2}}$
+\end{itemize}
+\end{thm}
+\newpage
+
+\section{Le modèle d'Ising en dimension $d \geq 5$}
+
+On considère 4 points de $\mathbb{Z}^d$, notés 1, 2, 3 et 4. On pose:
+$$
+U_4^{\beta} = \langle \sigma_1 \sigma_2 \sigma_3 \sigma_4 \rangle - \langle \sigma_1 \sigma_2 \rangle \langle \sigma_3 \sigma_4 \rangle - \langle \sigma_1 \sigma_3 \rangle \langle \sigma_2 \sigma_4 \rangle - \langle \sigma_1 \sigma_4 \rangle \langle \sigma_2 \sigma_3 \rangle
+$$
+
+\begin{prop}
+$$
+U_4^{\beta} = -2\langle \sigma_1 \sigma_2 \rangle \langle \sigma_3 \sigma_4 \rangle P^{\{1,2\}} \otimes P^{\{3,4\}}(\text{1,2,3,4 reliés})
+$$
+\end{prop}
+
+\begin{thm}[Infrared bound]
+$\exists c > 0, \ \forall \beta \leq \beta_c,$
+$$
+\langle \sigma_0, \sigma_x \rangle^f_{\beta} \leq \frac{c}{\beta} G(0,x) \leq \frac{\tilde{c}}{\beta \vert x \vert^{d-2}}
+$$
+\end{thm}
+
+\begin{prop}
+$$
+0 \leq - U_4(1,2,3,4) \leq 2 \sum_{y \in \mathbb{Z}^d} \langle \sigma_1 \sigma_y \rangle \langle \sigma_2 \sigma_y \rangle \langle \sigma_3 \sigma_y \rangle \langle \sigma_4 \sigma_y \rangle
+$$
+\end{prop}
 
 \end{document}
