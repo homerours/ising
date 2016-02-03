@@ -16,6 +16,7 @@
 \newframedtheorem{thm}{Théorème}
 \newframedtheorem{prop}{Proposition}
 \newframedtheorem{defi}{Définition}
+\newframedtheorem{lemme}{Lemme}
 
 \usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
 
@@ -310,5 +311,38 @@ $$\sum_{y\in S}\frac{\langle \sigma_0 \sigma_y \rangle\langle\sigma_y \sigma_x\r
 $$
 \end{preuve}
 \newpage
+
+\section{Comportement pour $\beta < \beta_c$}
+
+On définit, pour S un ensemble finit de sommets: $\tilde{\phi}_{\beta}(S) = \sum_{x \in \partial S} \langle \sigma_0 \sigma_x \rangle_{\mathbb{Z}^d,\beta}^f$
+
+\begin{lemme}
+Supposons qu'il existe $S \subset \mathbb{Z}^d$ fini, contenant $0$, et tel que $\tilde{\phi}_{\beta}(S)<1$. Il existe alors $c > 0$ tel que:
+$$
+\forall x \in \mathbb{Z}^d, \ \langle \sigma_0 \sigma_x \rangle_{\mathbb{Z}^d,\beta}^f \leq e^{-c\vert x \vert}
+$$
+\end{lemme}
+
+\begin{preuve}
+Par l'inégalité de Simon-Lieb et l'invariance par translation: 
+$$\langle \sigma_0 \sigma_x \rangle_{\mathbb{Z}^d,\beta}^f 
+\leq \tilde{\phi}_{\beta}(S) \sup_{y \in S} \langle \sigma_y \sigma_x \rangle_{\mathbb{Z}^d,\beta}^f 
+= \tilde{\phi}_{\beta}(S) \sup_{y \in S} \langle \sigma_0 \sigma_{x-y} \rangle_{\mathbb{Z}^d,\beta}^f$$
+
+On fixe $n \in \mathbb{N}$ tel que $S \subset \Lambda_n$. Soit $k \in \mathcal{N}^*$:
+$$
+\sup_{x \notin \Lambda_{kn}} \langle \sigma_0 \sigma_x \rangle_{\mathbb{Z}^d,\beta}^f 
+\leq \tilde{\phi}_{\beta}(S) \sup_{x \notin \Lambda_{kn}} \sup_{y \in S} \langle \sigma_0 \sigma_{x-y} \rangle_{\mathbb{Z}^d,\beta}^f
+\leq \tilde{\phi}_{\beta}(S) \sup_{x \notin \Lambda_{(k-1)n}} \langle \sigma_0 \sigma_{x} \rangle_{\mathbb{Z}^d,\beta}^f$$
+
+Car pour $y \in S \subset \Lambda_n$ et $x \notin \Lambda_{kn}$, $x-y \notin \Lambda_{(k-1)n}$. En itérant la relation et en utilisant que $\tilde{\phi}_{\beta}(S)<1$, on obtient la décroissance exponentielle.
+\end{preuve}
+
+On peut également définir
+$$\phi_{\beta}(S) = tanh(\beta) \sum_{\overset{x\in S, y \notin S}{x \sim y}} \langle \sigma_0 \sigma_x \rangle^f_{S,\beta}$$
+et montrer de même qu'il y a décroissance exponantielle dès que $\phi_{\beta}(S) <1$. Cette fois, le critère porte uniquement sur la mesure finie du modèle d'Ising sur S (fini). $\phi_{\beta}$ est donc continue. Cela implique que ce critère de décroissance exponentielle ne s'applique pas au point critique $\beta_c$ sinon on aurait également décroissance exponentielle pour un $\beta > \beta_c$. Au point critique, on a aussi pour tout $n \in \mathbb{N}^*, \ \phi_{\beta_c}(\Lambda_n) \geq 1$. En sommant sur $n$, on obtient:
+$$
+\sum_{x \in \mathbb{Z}^d} \langle \sigma_0 \sigma_x \rangle^f_{\beta_c, \mathbb{Z}^d} = + \infty
+$$
 
 \end{document}
