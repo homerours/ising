@@ -422,7 +422,7 @@ ainsi que la longueur de corrélation
 $$
 \xi_{\beta} = \big( \lim_{n \rightarrow + \infty} - \frac{1}{n} log( \langle \sigma_0 \sigma_{n e_1} \rangle ) \big)^{-1}
 $$
-Montrons que $xi_{\beta}$ est bien défini. On pose $a_n = - log( \langle \sigma_0 \sigma_{n e_1} \rangle )$. Par le théorème de décroissance exponentielle, on sait qu'il existe $c>0$ tel que $a_n \geq c n$. Par ailleurs
+Montrons que $\xi_{\beta}$ est bien défini. On pose $a_n = - log( \langle \sigma_0 \sigma_{n e_1} \rangle )$. Par le théorème de décroissance exponentielle, on sait qu'il existe $c>0$ tel que $a_n \geq c n$. Par ailleurs
 $$
 \langle \sigma_0 \sigma_{(n+m)e_1} \rangle = \langle \sigma_0 \sigma_{ne_1} \sigma_{ne_1} \sigma_{(n+m)e_1} \rangle 
 \geq \langle \sigma_0 \sigma_{ne_1} \rangle \langle \sigma_{ne_1} \sigma{(n+m)e_1} \rangle 
@@ -444,4 +444,43 @@ d'où
 $$
 \langle \sigma_0 \sigma_x \rangle_{\beta}^f \leq \exp(-\frac{\Vert x \Vert_{\infty}}{\xi_{\beta}})
 $$
+
+\begin{thm}[Trivialité du champ]
+$$
+g(\beta) \overset{def}{=} \frac{\sum_{x,y,z \in \mathbb{Z}^d} U_4^{\beta}(0,x,y,z)}{\chi(\beta)^2 \xi_{\beta}^d} \xrightarrow[\beta \uparrow \beta_c]{} 0
+$$
+\end{thm}
+
+\begin{thm} Il existe deux constantes $c, C > 0$ telles que
+$$
+\forall \beta < \beta_c, \ \frac{c}{\vert \beta - \beta_c \vert} \leq \chi(\beta) \leq \frac{C}{\vert \beta - \beta_c \vert}
+$$
+\end{thm}
+
+\begin{preuve}
+On va estimer $\frac{d}{d \beta} ( - \frac{1}{\chi(\beta)} )$. On a
+$$
+\chi'(\beta) = \sum_{x \in \mathbb{Z}^d} \frac{d}{d\beta} \langle \sigma_0 \sigma_x \rangle_{\beta}
+= \sum_{x \in \mathbb{Z}^d} \sum_{u \sim v} \langle \sigma_0 \sigma_x \sigma_u \sigma_v \rangle - \langle \sigma_0 \sigma_x \rangle \langle \sigma_u \sigma_v \rangle
+$$
+Donc par applications du switching lemma:
+$$
+\frac{d}{d \beta} ( - \frac{1}{\chi(\beta)} ) = \sum_{x, \ u \sim v} \frac{\langle \sigma_0 \sigma_u \rangle \langle \sigma_x \sigma_v \rangle}{\chi(\beta)^2} \mathbb{P}_{\beta}^{0,u} \otimes \mathbb{P}_{\beta}^{x,v} \big( 0 \leftrightarrow u \ \vert \ v \leftrightarrow x \big)
+$$
+La probabilité est inférieure à 1, on obtient donc $\frac{d}{d \beta} ( - \frac{1}{\chi(\beta)} ) \leq 2d$. En intégrant, on obtient:
+$$
+\frac{1}{2d(\beta_c - \beta)} \leq \chi(\beta) \text{  , valable en toute dimension}
+$$
+\end{preuve}
+
+\section{Modèle d'Ising en dimension 3 et 4}
+
+\begin{thm}[Aizenman, Duminil-Copin, Sidoravicius]
+$$
+\forall d \geq 3, \ m^*(\beta_c) = 0
+$$
+\end{thm}
+
+\underline{Remarque:} On montre en réalité l'égalité des mesures: $\langle \ . \ \rangle_{\beta_c}^f = \langle \ . \ \rangle_{\beta_c}^+$
+
 \end{document}
